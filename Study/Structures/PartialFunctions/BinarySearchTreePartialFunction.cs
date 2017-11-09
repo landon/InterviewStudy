@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Study.Structures.PartialFunctions
 {
-    public class BinarySearchTreePartialFunction<TDomain, TCodomain> : IPartialFunction<TDomain, TCodomain>
+    public class BinarySearchTreePartialFunction<TDomain, TCodomain> : ISortedPartialFunction<TDomain, TCodomain>
         where TDomain : IComparable<TDomain>
     {
         bool _used;
@@ -106,6 +106,24 @@ namespace Study.Structures.PartialFunctions
         bool IsEmpty(BinarySearchTreePartialFunction<TDomain, TCodomain> bst)
         {
             return bst == null || !bst._used;
+        }
+
+        public System.Collections.Generic.IEnumerable<Tuple<TDomain, TCodomain>> EnumerateSorted()
+        {
+            if (!IsEmpty(_left))
+            {
+                foreach (var tuple in _left.EnumerateSorted())
+                    yield return tuple;
+            }
+
+            if (!IsEmpty(this))
+                yield return new Tuple<TDomain, TCodomain>(_x, _y);
+
+            if (!IsEmpty(_right))
+            {
+                foreach (var tuple in _right.EnumerateSorted())
+                    yield return tuple;
+            }
         }
     }
 }

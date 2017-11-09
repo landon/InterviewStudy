@@ -9,4 +9,10 @@ namespace Study.Structures
         bool TryApply(TDomain x, out TCodomain y);
         int Count();
     }
+
+    public interface ISortedPartialFunction<TDomain, TCodomain> : IPartialFunction<TDomain, TCodomain>
+        where TDomain : IComparable<TDomain>
+    {
+        System.Collections.Generic.IEnumerable<Tuple<TDomain, TCodomain>> EnumerateSorted();
+    }
 }

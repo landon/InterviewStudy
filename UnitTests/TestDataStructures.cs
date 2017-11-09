@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Study.Structures;
 using Study.Structures.Stacks;
+using System.Linq;
 
 namespace UnitTests
 {
@@ -9,10 +10,10 @@ namespace UnitTests
     public class TestDataStructures
     {
         [TestMethod]
-        public void IPartialFunction_Test2()
+        public void ISortedPartialFunction_Test()
         {
-            var reference = new System.Collections.Generic.Dictionary<string, int>();
-            var f = Common.Container.GetInstance<IPartialFunction<string, int>>();
+            var reference = new System.Collections.Generic.SortedDictionary<string, int>();
+            var f = Common.Container.GetInstance<ISortedPartialFunction<string, int>>();
 
             var sentence = "A man a plan a canal panama. That is a palindrome.  Blah, donkey's are fun like myopic squid.";
             var words = sentence.Split(' ');
@@ -42,6 +43,11 @@ namespace UnitTests
             }
 
             Assert.AreEqual(f.Count(), reference.Count);
+
+            var rr = string.Join(";", reference.Select(kvp => kvp.Key));
+            var uu = string.Join(";", f.EnumerateSorted().Select(kvp => kvp.Item1));
+
+            Assert.AreEqual(rr, uu);
         }
 
         [TestMethod]

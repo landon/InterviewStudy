@@ -30,5 +30,10 @@ namespace Study.Structures.PartialFunctions
         {
             return _map.Count;
         }
+
+        public System.Collections.Generic.IEnumerable<Tuple<TDomain, TCodomain>> EnumerateSorted()
+        {
+            return _map.Select(kvp => new Tuple<TDomain, TCodomain>(kvp.Key, kvp.Value));
+        }
     }
 }
