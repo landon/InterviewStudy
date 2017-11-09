@@ -5,7 +5,7 @@ namespace Study.Structures.PartialFunctions
     public class HashTableSeparateChainingPartialFunction<TDomain, TCodomain> : IPartialFunction<TDomain, TCodomain>
     {
         int count;
-        LinkedList<Tuple<TDomain, TCodomain>>[] _data = new LinkedList<Tuple<TDomain, TCodomain>>[50];
+        LinkedList<Tuple<TDomain, TCodomain>>[] _data = new LinkedList<Tuple<TDomain, TCodomain>>[5];
 
         int GetHash(TDomain x)
         {
