@@ -9,6 +9,42 @@ namespace UnitTests
     public class TestDataStructures
     {
         [TestMethod]
+        public void IPartialFunction_Test2()
+        {
+            var reference = new System.Collections.Generic.Dictionary<string, int>();
+            var f = Common.Container.GetInstance<IPartialFunction<string, int>>();
+
+            var sentence = "A man a plan a canal panama. That is a palindrome.  Blah, donkey's are fun like myopic squid.";
+            var words = sentence.Split(' ');
+            foreach (var w in words)
+            {
+                f.Add(w, w.Length);
+                reference[w] = w.Length;
+            }
+
+            Assert.AreEqual(f.Count(), reference.Count);
+
+            f.Remove("palindrome.");
+            reference.Remove("palindrome.");
+
+            Assert.AreEqual(f.Count(), reference.Count);
+
+            int xc;
+            Assert.IsFalse(f.TryApply("palindrome.", out xc));
+
+            foreach (var w in words)
+            {
+                int c;
+                var found = f.TryApply(w, out c);
+                Assert.IsTrue(w == "palindrome." || found);
+                if (w != "palindrome.")
+                    Assert.AreEqual(c, w.Length);
+            }
+
+            Assert.AreEqual(f.Count(), reference.Count);
+        }
+
+        [TestMethod]
         public void IPartialFunction_Test()
         {
             var f = Common.Container.GetInstance<IPartialFunction<string, int>>();

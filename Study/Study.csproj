@@ -50,6 +50,7 @@
     <Compile Include="Structures\ISet.cs" />
     <Compile Include="Structures\IStack.cs" />
     <Compile Include="Structures\LinkedList.cs" />
+    <Compile Include="Structures\PartialFunctions\BinarySearchTreePartialFunction.cs" />
     <Compile Include="Structures\PartialFunctions\HashtableOpenAddressingPartialFunction.cs" />
     <Compile Include="Structures\PartialFunctions\HashTableSeparateChainingPartialFunction.cs" />
     <Compile Include="Structures\PartialFunctions\ReferencePartialFunction.cs" />

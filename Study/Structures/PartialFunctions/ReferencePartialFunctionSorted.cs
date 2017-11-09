@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Study.Structures.PartialFunctions
 {
     public class ReferencePartialFunctionSorted<TDomain, TCodomain> : IPartialFunction<TDomain, TCodomain>
+        where TDomain : IComparable<TDomain>
     {
         SortedDictionary<TDomain, TCodomain> _map = new SortedDictionary<TDomain, TCodomain>();
 
