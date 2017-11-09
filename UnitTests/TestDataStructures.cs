@@ -15,7 +15,8 @@ namespace UnitTests
             var reference = new System.Collections.Generic.SortedDictionary<string, int>();
             var f = Common.Container.GetInstance<ISortedPartialFunction<string, int>>();
 
-            var sentence = "A man a plan a canal panama. That is a palindrome.  Blah, donkey's are fun like myopic squid.";
+            var sentence = @"A man a plan a canal panama. That is a palindrome.  Blah, donkey's are fun like myopic squid. blah what
+carl mike time john, 845 the apricot is not an orange, it is an orange not it is the other indeed";
             var words = sentence.Split(' ');
             foreach (var w in words)
             {

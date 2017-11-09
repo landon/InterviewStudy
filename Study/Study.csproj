@@ -47,7 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structures\IPartialFunction.cs" />
     <Compile Include="Structures\IQueue.cs" />
-    <Compile Include="Structures\ISet.cs" />
     <Compile Include="Structures\IStack.cs" />
     <Compile Include="Structures\LinkedList.cs" />
     <Compile Include="Structures\PartialFunctions\BinarySearchTreePartialFunction.cs" />
@@ -55,6 +54,7 @@
     <Compile Include="Structures\PartialFunctions\HashTableSeparateChainingPartialFunction.cs" />
     <Compile Include="Structures\PartialFunctions\ReferencePartialFunction.cs" />
     <Compile Include="Structures\PartialFunctions\ReferencePartialFunctionSorted.cs" />
+    <Compile Include="Structures\PartialFunctions\SkipListPartialFunction.cs" />
     <Compile Include="Structures\Queues\LinkedListQueue.cs" />
     <Compile Include="Structures\Stacks\LinkedListStack.cs" />
   </ItemGroup>

@@ -17,7 +17,7 @@ namespace UnitTests
             Container.Register<IStack<int>, LinkedListStack<int>>();
             Container.Register<IQueue<int>, LinkedListQueue<int>>();
             Container.Register<IPartialFunction<string, int>, HashtablePartialFunction<string, int>>();
-            Container.Register<ISortedPartialFunction<string, int>, BinarySearchTreePartialFunction<string, int>>();
+            Container.Register<ISortedPartialFunction<string, int>, SkipListPartialFunction<string, int>>();
         }
     }
 }
