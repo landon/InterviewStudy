@@ -3,12 +3,31 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Study.Structures;
 using Study.Structures.Stacks;
 using System.Linq;
+using Study.Algorithms;
 
 namespace UnitTests
 {
     [TestClass]
     public class TestDataStructures
     {
+        static Random RNG = new Random(101);
+        [TestMethod]
+        public void Sorter_Test()
+        {
+            var sorter = Common.Container.GetInstance<ISorter<int>>();
+
+            var items = new int[100000];
+            for (int i = 0; i < items.Length; i++)
+                items[i] = RNG.Next(100000);
+
+            var reference = string.Join(",", items.OrderBy(x => x));
+
+            sorter.Sort(items);
+            var ours = string.Join(",", items);
+
+            Assert.AreEqual(reference, ours);
+        }
+
         [TestMethod]
         public void ISortedPartialFunction_Test()
         {

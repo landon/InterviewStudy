@@ -1,4 +1,6 @@
 ﻿using SimpleInjector;
+using Study.Algorithms;
+using Study.Algorithms.Sorters;
 using Study.Structures;
 using Study.Structures.PartialFunctions;
 using Study.Structures.Queues;
@@ -18,6 +20,8 @@ namespace UnitTests
             Container.Register<IQueue<int>, LinkedListQueue<int>>();
             Container.Register<IPartialFunction<string, int>, HashtablePartialFunction<string, int>>();
             Container.Register<ISortedPartialFunction<string, int>, SkipListPartialFunction<string, int>>();
+
+            Container.Register<ISorter<int>, MergeSorter<int>>();
         }
     }
 }
