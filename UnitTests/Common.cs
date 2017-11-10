@@ -21,7 +21,7 @@ namespace UnitTests
             Container.Register<IPartialFunction<string, int>, HashtablePartialFunction<string, int>>();
             Container.Register<ISortedPartialFunction<string, int>, SkipListPartialFunction<string, int>>();
 
-            Container.Register<ISorter<int>, MergeSorter<int>>();
+            Container.Register<ISorter<int>, SortedPartialOrderSorter<int, BinarySearchTreePartialFunction<int, int>>>();
         }
     }
 }
