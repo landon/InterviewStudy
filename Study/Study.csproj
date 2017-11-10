@@ -46,7 +46,6 @@
     <Compile Include="Algorithms\PrimeNumbers.cs" />
     <Compile Include="Algorithms\Sorters\AbstractSorter.cs" />
     <Compile Include="Algorithms\Sorters\BubbleSorter.cs" />
-    <Compile Include="Algorithms\Sorters\HeapSorter.cs" />
     <Compile Include="Algorithms\Sorters\InsertionSorter.cs" />
     <Compile Include="Algorithms\Sorters\MergeSorter.cs" />
     <Compile Include="Algorithms\Sorters\QuickSorter.cs" />
@@ -54,6 +53,7 @@
     <Compile Include="Algorithms\Sorters\SortedPartialOrderSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structures\Graph.cs" />
     <Compile Include="Structures\IPartialFunction.cs" />
     <Compile Include="Structures\IQueue.cs" />
     <Compile Include="Structures\IStack.cs" />
