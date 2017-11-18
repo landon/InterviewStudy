@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1EFB61CA-8854-4477-BDB5-F1555C3ADF1C}</ProjectGuid>
+    <ProjectGuid>{C2E84EC4-5276-4BA3-B841-BFC3E93F9C81}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Study</RootNamespace>
-    <AssemblyName>Study</AssemblyName>
+    <RootNamespace>GenerateCounterexampleCandidates</RootNamespace>
+    <AssemblyName>GenerateCounterexampleCandidates</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,36 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\ISorter.cs" />
-    <Compile Include="Algorithms\PrimeNumbers.cs" />
-    <Compile Include="Algorithms\Sorters\AbstractSorter.cs" />
-    <Compile Include="Algorithms\Sorters\BubbleSorter.cs" />
-    <Compile Include="Algorithms\Sorters\InsertionSorter.cs" />
-    <Compile Include="Algorithms\Sorters\MergeSorter.cs" />
-    <Compile Include="Algorithms\Sorters\QuickSorter.cs" />
-    <Compile Include="Algorithms\Sorters\SelectionSorter.cs" />
-    <Compile Include="Algorithms\Sorters\SortedPartialOrderSorter.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Structures\Graph.cs" />
-    <Compile Include="Structures\IPartialFunction.cs" />
-    <Compile Include="Structures\IQueue.cs" />
-    <Compile Include="Structures\IStack.cs" />
-    <Compile Include="Structures\LinkedList.cs" />
-    <Compile Include="Structures\PartialFunctions\BinarySearchTreePartialFunction.cs" />
-    <Compile Include="Structures\PartialFunctions\HashtableOpenAddressingPartialFunction.cs" />
-    <Compile Include="Structures\PartialFunctions\HashTableSeparateChainingPartialFunction.cs" />
-    <Compile Include="Structures\PartialFunctions\ReferencePartialFunction.cs" />
-    <Compile Include="Structures\PartialFunctions\ReferencePartialFunctionSorted.cs" />
-    <Compile Include="Structures\PartialFunctions\SkipListPartialFunction.cs" />
-    <Compile Include="Structures\Queues\LinkedListQueue.cs" />
-    <Compile Include="Structures\Stacks\LinkedListStack.cs" />
-    <Compile Include="Utility\EquivalenceRelation.cs" />
-    <Compile Include="Utility\SublistEnumeration.cs" />
+    <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
