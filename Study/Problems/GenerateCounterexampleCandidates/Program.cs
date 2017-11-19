@@ -54,23 +54,14 @@ namespace GenerateCounterexampleCandidates
                 b.IAmSpecial = true;
                 f.AddVertex(f.Specials);
 
-                return f.Vertices.IndicesWhere(v => v.Degree < Delta && v != a && v != b).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct().SelectMany(S =>
+                return f.Vertices.IndicesWhere(v => v.Degree < Delta && v != a && v != b).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct().Select(S =>
                 {
                     var f2 = f.Clone();
                     var first = f2.Vertices.Reverse<Vertex>().Skip(1).First();
                     foreach (var i in S)
                         f2.AddEdge(first, f2.Vertices[i]);
 
-                    return f2.Vertices.IndicesWhere(v => v.Degree < Delta && v != a && v != b).GroupBy(i => f2.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct()
-                    .Where(T => S.Zip(T, (s,t) => s-t).SkipWhile(x => x == 0).FirstOrDefault() <= 0)
-                    .Select(T =>
-                    {
-                        var f3 = f2.Clone();
-                        var second = f3.Vertices.Reverse<Vertex>().Skip(2).First();
-                        foreach (var i in T)
-                            f3.AddEdge(second, f3.Vertices[i]);
-                        return f3;
-                    });
+                    return f2;
                 });
             });
             var rng = new Random();
@@ -85,7 +76,9 @@ namespace GenerateCounterexampleCandidates
                     {
                         var ii = rng.Next(a.Count);
                         var jj = rng.Next(a.Count);
-                        if (ii == jj || f2.Vertices[a[ii]].Neighbors.Contains(f2.Vertices[a[jj]]))
+                        if (ii == jj || 
+                        new[] { a[ii], a[jj] }.Except(new[] { f2.Vertices.Count - 3, f2.Vertices.Count - 2 }).Count() <= 0 || 
+                        f2.Vertices[a[ii]].Neighbors.Contains(f2.Vertices[a[jj]]))
                         {
                             fails++;
                         }
