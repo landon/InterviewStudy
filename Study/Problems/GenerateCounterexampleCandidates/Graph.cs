@@ -119,7 +119,7 @@ namespace GenerateCounterexampleCandidates
             return subgraph.Count <= 0 ? 0 : 1 + EnumerateMaximalIndependentSets(subgraph).Min(M => ChromaticNumber(subgraph.Except(M).ToList()));
         }
 
-        public int GreedyColor()
+        public int ShuffleThenGreedyColor()
         {
             var max = 0;
             foreach (var v in Vertices)

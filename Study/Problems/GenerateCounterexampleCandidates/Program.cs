@@ -14,7 +14,9 @@ namespace GenerateCounterexampleCandidates
         {
             int total = 0;
             var da = new List<int>() { 2, 2, 2, 2, 2, 2 };
-            foreach (var good in EnumerateGraphsWithClassSizes(da).Select(x => { total++;  return x; }).Where(f => f.Degrees.Min() >= Delta - 1)
+            foreach (var good in EnumerateGraphsWithClassSizes(da)
+                .Select(x => { total++; return x; })
+                .Where(f => f.Degrees.Min() >= Delta - 1)
                 .Where(f =>
                 {
                     return true;
@@ -23,13 +25,17 @@ namespace GenerateCounterexampleCandidates
                 {
                     for (int qq = 0; qq < 10; qq++)
                     {
-                        if (f.GreedyColor() < Delta)
+                        if (f.ShuffleThenGreedyColor() < Delta)
                             return false;
                     }
                     return f.ChromaticNumber() == Delta;
                 })
-                .Where(f => f.CliqueNumber() <= Delta - 1).Select(f => f.ToGraph6()))
+                .Where(f => f.CliqueNumber() <= Delta - 1)
+                .Select(f => f.ToGraph6()))
+            {
                 Console.Write(good + "  ");
+            }
+
             Console.WriteLine();
             Console.WriteLine("done " + total);
             Console.ReadKey();
@@ -38,7 +44,7 @@ namespace GenerateCounterexampleCandidates
         static IEnumerable<Graph> EnumerateGraphsWithClassSizes(IList<int> sizes)
         {
             var degrees = sizes.Select(s => 2*(s - 1));
-            var frames = AllGraphsWithDegreeSequenceAtMost(degrees, sizes.Count); // new[] { new Graph("E_`G".GetEdgeWeights()) };
+            var frames = AllGraphsWithDegreeSequenceAtMost(degrees, sizes.Count);
             var completions = frames.SelectMany(f => Explode(f, sizes));
             var missingSomeEdges = completions.SelectMany(f =>
             {
@@ -48,14 +54,14 @@ namespace GenerateCounterexampleCandidates
                 b.IAmSpecial = true;
                 f.AddVertex(f.Specials);
 
-                return f.Vertices.IndicesWhere(v => v.Degree < Delta).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct().SelectMany(S =>
+                return f.Vertices.IndicesWhere(v => v.Degree < Delta && v != a && v != b).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct().SelectMany(S =>
                 {
                     var f2 = f.Clone();
                     var first = f2.Vertices.Reverse<Vertex>().Skip(1).First();
                     foreach (var i in S)
                         f2.AddEdge(first, f2.Vertices[i]);
 
-                    return f2.Vertices.IndicesWhere(v => v.Degree < Delta).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct()
+                    return f2.Vertices.IndicesWhere(v => v.Degree < Delta && v != a && v != b).GroupBy(i => f2.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct()
                     .Where(T => S.Zip(T, (s,t) => s-t).SkipWhile(x => x == 0).FirstOrDefault() <= 0)
                     .Select(T =>
                     {
@@ -133,10 +139,10 @@ namespace GenerateCounterexampleCandidates
 
         static IEnumerable<Graph> AllGraphsWithDegreeSequenceAtMost(IEnumerable<int> degrees, int n)
         {
-            return EnumerateAllGraphs(n).Where(f => IsAtMost(f.Degrees, degrees)).OrderByDescending(f => f.Degrees.Sum());
+            return EnumerateAllGraphs(n).Where(f => IsEachAtMost(f.Degrees, degrees)).OrderByDescending(f => f.Degrees.Sum());
         }
 
-        static bool IsAtMost(IEnumerable<int> a, IEnumerable<int> b)
+        static bool IsEachAtMost(IEnumerable<int> a, IEnumerable<int> b)
         {
             return a.Zip(b, (x, y) => x <= y).All(bb => bb);
         }
