@@ -21,7 +21,7 @@ namespace GenerateCounterexampleCandidates
                 })
                 .Where(f =>
                 {
-                    for (int qq = 0; qq < 50; qq++)
+                    for (int qq = 0; qq < 10; qq++)
                     {
                         if (f.GreedyColor() < Delta)
                             return false;
@@ -55,7 +55,9 @@ namespace GenerateCounterexampleCandidates
                     foreach (var i in S)
                         f2.AddEdge(first, f2.Vertices[i]);
 
-                    return f2.Vertices.IndicesWhere(v => v.Degree < Delta).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct().Select(T =>
+                    return f2.Vertices.IndicesWhere(v => v.Degree < Delta).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct()
+                    .Where(T => S.Zip(T, (s,t) => s-t).SkipWhile(x => x == 0).FirstOrDefault() <= 0)
+                    .Select(T =>
                     {
                         var f3 = f2.Clone();
                         var second = f3.Vertices.Reverse<Vertex>().Skip(2).First();
