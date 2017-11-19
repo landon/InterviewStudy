@@ -98,10 +98,12 @@ namespace GenerateCounterexampleCandidates
 
         public Graph Clone()
         {
-            var si = Enumerable.Range(0, Vertices.Count).Where(i => Vertices[i].IAmSpecial).ToList();
             var g = new Graph(GetEdgeWeights());
-            foreach (var i in si)
-                g.Vertices[i].IAmSpecial = true;
+            for (int i = 0; i < Vertices.Count; i++)
+            {
+                g.Vertices[i].IAmSpecial = Vertices[i].IAmSpecial;
+                g.Vertices[i].Color = Vertices[i].Color;
+            }
 
             return g;
         }

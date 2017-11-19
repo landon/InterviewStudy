@@ -40,17 +40,35 @@ namespace GenerateCounterexampleCandidates
             var degrees = sizes.Select(s => 2*(s - 1));
             var frames = AllGraphsWithDegreeSequenceAtMost(degrees, sizes.Count); // new[] { new Graph("E_`G".GetEdgeWeights()) };
             var completions = frames.SelectMany(f => Explode(f, sizes));
-            var missingSomeEdges = completions.Select(f =>
+            var missingSomeEdges = completions.SelectMany(f =>
             {
-                f.AddVertex().IAmSpecial = true;
-                f.AddVertex().IAmSpecial = true;
+                var a = f.AddVertex();
+                a.IAmSpecial = true;
+                var b = f.AddVertex();
+                b.IAmSpecial = true;
                 f.AddVertex(f.Specials);
-                return f;
+
+                return f.Vertices.IndicesWhere(v => v.Degree < Delta).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct().SelectMany(S =>
+                {
+                    var f2 = f.Clone();
+                    var first = f2.Vertices.Reverse<Vertex>().Skip(1).First();
+                    foreach (var i in S)
+                        f2.AddEdge(first, f2.Vertices[i]);
+
+                    return f2.Vertices.IndicesWhere(v => v.Degree < Delta).GroupBy(i => f.Vertices[i].Color).Select(g => g.ToList()).CartesianProduct().Select(T =>
+                    {
+                        var f3 = f2.Clone();
+                        var second = f3.Vertices.Reverse<Vertex>().Skip(2).First();
+                        foreach (var i in T)
+                            f3.AddEdge(second, f3.Vertices[i]);
+                        return f3;
+                    });
+                });
             });
             var rng = new Random();
             var fill = missingSomeEdges.SelectMany(f =>
             {
-                return Enumerable.Range(0, 100000).Select(iii =>
+                return Enumerable.Range(0, 10).Select(iii =>
                 {
                     var f2 = f.Clone();
                     var a = Enumerable.Range(0, f2.Vertices.Count).Where(p => f2.Vertices[p].Degree < Delta).ToList();
@@ -79,10 +97,15 @@ namespace GenerateCounterexampleCandidates
         static IEnumerable<Graph> Explode(Graph f, IList<int> sizes)
         {
             var n = f.Vertices.Count;
+            var cc = 1;
             foreach (var v in f.Vertices)
+            {
                 v.IAmSpecial = true;
+                v.Color = cc;
+                cc++;
+            }
 
-            var nv = sizes.Select(s => Enumerable.Range(0, s - 1).Select(i => f.AddVertex()).ToList()).ToList();
+            var nv = sizes.Select((s,c) => Enumerable.Range(0, s - 1).Select(i => { var v = f.AddVertex(); v.Color = c + 1; return v; }).ToList()).ToList();
             var roots = f.Specials.ToList();
             
             for (int i = 0; i < n; i++)
