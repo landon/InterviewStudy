@@ -8,6 +8,7 @@ namespace GenerateCounterexampleCandidates
 {
     public class Graph
     {
+        static Random RNG = new Random();
         public List<Vertex> Vertices = new List<Vertex>();
 
         public IEnumerable<Vertex> Specials
@@ -94,6 +95,52 @@ namespace GenerateCounterexampleCandidates
 
             return w;
         }
+
+        public Graph Clone()
+        {
+            var si = Enumerable.Range(0, Vertices.Count).Where(i => Vertices[i].IAmSpecial).ToList();
+            var g = new Graph(GetEdgeWeights());
+            foreach (var i in si)
+                g.Vertices[i].IAmSpecial = true;
+
+            return g;
+        }
+
+        #region Coloring
+
+        public int ChromaticNumber()
+        {
+            return ChromaticNumber(Enumerable.Range(0, Vertices.Count).ToList());
+        }
+        int ChromaticNumber(List<int> subgraph)
+        {
+            return subgraph.Count <= 0 ? 0 : 1 + EnumerateMaximalIndependentSets(subgraph).Min(M => ChromaticNumber(subgraph.Except(M).ToList()));
+        }
+
+        public int GreedyColor()
+        {
+            var max = 0;
+            foreach (var v in Vertices)
+                v.Color = 0;
+
+            var nn = Enumerable.Range(0, Vertices.Count).ToList();
+            nn.Shuffle();
+            for(int i = 0; i < nn.Count; i++)
+            {
+                var v = Vertices[nn[i]];
+                var used = v.Neighbors.Select(w => w.Color).Distinct().ToList();
+                int c = 1;
+                while (used.Contains(c)) c++;
+                v.Color = c;
+
+                if (c > max)
+                    max = c;
+            }
+
+            return max;
+        }
+
+        #endregion
 
         #region Bron Kerbosch
 

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C2E84EC4-5276-4BA3-B841-BFC3E93F9C81}</ProjectGuid>
+    <ProjectGuid>{68A15EA1-4F44-4E77-B6B2-7BFFBC36E4B5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GenerateCounterexampleCandidates</RootNamespace>
-    <AssemblyName>GenerateCounterexampleCandidates</AssemblyName>
+    <RootNamespace>HackerRank</RootNamespace>
+    <AssemblyName>HackerRank</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -30,7 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -43,12 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Graph.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SublistEnumeration.cs" />
-    <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

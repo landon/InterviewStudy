@@ -9,6 +9,46 @@ namespace GenerateCounterexampleCandidates
 {
     public static class Extensions
     {
+        static readonly Random RNG = new Random();
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = RNG.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+
+        public static IEnumerable<int> IndicesWhere<T>(this IEnumerable<T> source, Func<T, bool> condition)
+        {
+            var i = 0;
+            foreach (var t in source)
+            {
+                if (condition(t))
+                    yield return i;
+
+                i++;
+            }
+        }
+
+        public static int FirstIndex<T>(this IEnumerable<T> source, Func<T, bool> condition)
+        {
+            var i = 0;
+            foreach (var t in source)
+            {
+                if (condition(t))
+                    return i;
+
+                i++;
+            }
+
+            return -1;
+        }
+
         public static IEnumerable<Graph> EnumerateGraph6File(this string graph6File)
         {
             using (var sr = new StreamReader(graph6File))

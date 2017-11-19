@@ -8,13 +8,30 @@ namespace GenerateCounterexampleCandidates
 {
     class Program
     {
+        const int Delta = 8;
+
         static void Main(string[] args)
         {
+            int total = 0;
             var da = new List<int>() { 2, 2, 2, 2, 2, 2 };
-            var goods = string.Join("  ", EnumerateGraphsWithClassSizes(da).Where(f => f.CliqueNumber() <= 6).Select(f => f.ToGraph6()));
-            Console.WriteLine(goods);
+            foreach (var good in EnumerateGraphsWithClassSizes(da).Select(x => { total++;  return x; }).Where(f => f.Degrees.Min() >= Delta - 1)
+                .Where(f =>
+                {
+                    return true;
+                })
+                .Where(f =>
+                {
+                    for (int qq = 0; qq < 50; qq++)
+                    {
+                        if (f.GreedyColor() < Delta)
+                            return false;
+                    }
+                    return f.ChromaticNumber() == Delta;
+                })
+                .Where(f => f.CliqueNumber() <= Delta - 1).Select(f => f.ToGraph6()))
+                Console.Write(good + "  ");
             Console.WriteLine();
-            Console.WriteLine("done");
+            Console.WriteLine("done " + total);
             Console.ReadKey();
         }
 
@@ -30,8 +47,33 @@ namespace GenerateCounterexampleCandidates
                 f.AddVertex(f.Specials);
                 return f;
             });
-
-            return missingSomeEdges;
+            var rng = new Random();
+            var fill = missingSomeEdges.SelectMany(f =>
+            {
+                return Enumerable.Range(0, 100000).Select(iii =>
+                {
+                    var f2 = f.Clone();
+                    var a = Enumerable.Range(0, f2.Vertices.Count).Where(p => f2.Vertices[p].Degree < Delta).ToList();
+                    var fails = 0;
+                    while (fails < 20)
+                    {
+                        var ii = rng.Next(a.Count);
+                        var jj = rng.Next(a.Count);
+                        if (ii == jj || f2.Vertices[a[ii]].Neighbors.Contains(f2.Vertices[a[jj]]))
+                        {
+                            fails++;
+                        }
+                        else
+                        {
+                            fails = 0;
+                            f2.AddEdge(f2.Vertices[a[ii]], f2.Vertices[a[jj]]);
+                            a = Enumerable.Range(0, f2.Vertices.Count).Where(p => f2.Vertices[p].Degree < Delta).ToList();
+                        }
+                    }
+                    return f2;
+                });
+            });
+            return fill;
         }
 
         static IEnumerable<Graph> Explode(Graph f, IList<int> sizes)
@@ -66,7 +108,7 @@ namespace GenerateCounterexampleCandidates
 
         static IEnumerable<Graph> AllGraphsWithDegreeSequenceAtMost(IEnumerable<int> degrees, int n)
         {
-            return EnumerateAllGraphs(n).Where(f => IsAtMost(f.Degrees, degrees));
+            return EnumerateAllGraphs(n).Where(f => IsAtMost(f.Degrees, degrees)).OrderByDescending(f => f.Degrees.Sum());
         }
 
         static bool IsAtMost(IEnumerable<int> a, IEnumerable<int> b)
