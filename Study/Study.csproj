@@ -67,6 +67,7 @@
     <Compile Include="Structures\Queues\LinkedListQueue.cs" />
     <Compile Include="Structures\Stacks\LinkedListStack.cs" />
     <Compile Include="Utility\EquivalenceRelation.cs" />
+    <Compile Include="Utility\RomanNumerals.cs" />
     <Compile Include="Utility\SublistEnumeration.cs" />
   </ItemGroup>
   <ItemGroup>

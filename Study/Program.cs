@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Study.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,37 +11,13 @@ class Solution
 
     static void Main(String[] args)
     {
-        var count = 1;// int.Parse(Console.ReadLine());
-        for (int i = 0; i < count; i++)
-            PrintPythag(721);
-
-        Console.ReadKey();
-    }
-
-    static void PrintPythag(int n)
-    {
-        Console.WriteLine(string.Join(" ", Enumerable.Range(0, n + 1).Select(r => Choice(n, r))));
-    }
-
-    static Dictionary<Tuple<int, int>, long> Lookup = new Dictionary<Tuple<int, int>, long>();
-    static long Choice(int n, int r)
-    {
-        if (r < 0)
-            return 0;
-        if (r > n - r)
-            r = n - r;
-        if (r == 0 || n <= 1)
-            return 1;
-
-        var t = new Tuple<int, int>(n, r);
-        long value;
-        if (!Lookup.TryGetValue(t, out value))
+        for (int i = 1; i < 1001; i++)
         {
-            value = Choice(n - 1, r - 1) + Choice(n - 1, r);
-            Lookup[t] = value;
+            var r = RomanNumerals.ToRoman(i);
+            Console.WriteLine(i + " = " + RomanNumerals.FromRoman(r));
         }
 
-        return value;
+        Console.ReadKey();
     }
 }
 
