@@ -10,47 +10,67 @@ namespace HackerRank
     {
         static void Main(String[] args)
         {
-            var mnr = new int[] { 4, 4, 6 };//Console.ReadLine().Split(' ').Select(x => int.Parse(x)).ToList();
+            var mnr = new int[] { 210, 202, 7865 };//Console.ReadLine().Split(' ').Select(x => int.Parse(x)).ToList();
             var m = mnr[0];
             var n = mnr[1];
             var r = mnr[2];
             var d = new int[m, n];
+            var periods = ComputePeriods(m, n);
+
             for (int i = 0; i < m; i++)
             {
                 var j = 0;
                 foreach (var x in Console.ReadLine().Split(' ').Select(x => int.Parse(x)))
                 {
-                    var tup = Destination(i, j, m, n, r);
+                    var q = ToOuterRing(i, j, m, n);
+                    var p = periods[q];
+                    var tup = Destination(i, j, m, n, r % p);
                     d[tup.Item1, tup.Item2] = x;
                     j++;
                 }
             }
+
             for (int i = 0; i < m; i++)
                 Console.WriteLine(string.Join(" ", Enumerable.Range(0, n).Select(j => d[i, j])));
 
             Console.ReadKey();
         }
 
-        static Dictionary<Tuple<int, int, int, int>, Tuple<int, int>> _lookup = new Dictionary<Tuple<int, int, int, int>, Tuple<int, int>>();
-        static Tuple<int, int> Destination(int i, int j, int m, int n, int r)
+        static List<int> ComputePeriods(int m, int n)
         {
-            for (int k = 0; k < r; k++)
+            var periods = new List<int>();
+            for (int k = 0; k <= Math.Min(m, n); k++)
             {
-                var tup = Destination(i, j, m, n);
-                i = tup.Item1;
-                j = tup.Item2;
+                var p = 2 * (m + n - 4 * k) - 4;
+                if (p <= 0)
+                    break;
+                periods.Add(p);  
             }
-
-            return new Tuple<int, int>(i, j);
+            return periods;
         }
 
-        static Tuple<int, int> Destination(int i, int j, int m, int n)
+        static Tuple<int, int> Destination(int i, int j, int m, int n, int r)
         {
-            var key = new Tuple<int, int, int, int>(i, j, m, n);
+            if (r == 0)
+                return new Tuple<int, int>(i, j);
+
+            var key = new Tuple<int, int, int, int, int>(i, j, m, n, r);
             Tuple<int, int> answer;
             if (_lookup.TryGetValue(key, out answer))
                 return answer;
 
+            var tup = Destination(i, j, m, n, r - 1);
+            answer = Destination(tup.Item1, tup.Item2, m, n);
+
+            _lookup[key] = answer;
+
+            return answer;
+        }
+
+        static Dictionary<Tuple<int, int, int, int, int>, Tuple<int, int>> _lookup = new Dictionary<Tuple<int, int, int, int, int>, Tuple<int, int>>();
+        static Tuple<int, int> Destination(int i, int j, int m, int n)
+        {
+            Tuple<int, int> answer = null;
             var q = ToOuterRing(i, j, m, n);
             var left = ToOuterRing(i, j - 1, m, n);
             var right = ToOuterRing(i, j + 1, m, n);
@@ -79,7 +99,6 @@ namespace HackerRank
                     answer = new Tuple<int, int>(i - 1, j); // otherwise in right side, move up
             }
 
-            _lookup[key] = answer;
             return answer;
         }
 

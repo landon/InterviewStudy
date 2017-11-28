@@ -11,11 +11,7 @@ class Solution
 
     static void Main(String[] args)
     {
-        for (int i = 1; i < 1001; i++)
-        {
-            var r = RomanNumerals.ToRoman(i);
-            Console.WriteLine(i + " = " + RomanNumerals.FromRoman(r));
-        }
+        Console.WriteLine(NumberTheory.GCD(123, 12));
 
         Console.ReadKey();
     }
