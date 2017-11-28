@@ -53,21 +53,12 @@ namespace HackerRank
         {
             if (r == 0)
                 return new Tuple<int, int>(i, j);
-
-            var key = new Tuple<int, int, int, int, int>(i, j, m, n, r);
-            Tuple<int, int> answer;
-            if (_lookup.TryGetValue(key, out answer))
-                return answer;
-
             var tup = Destination(i, j, m, n, r - 1);
-            answer = Destination(tup.Item1, tup.Item2, m, n);
-
-            _lookup[key] = answer;
+            var answer = Destination(tup.Item1, tup.Item2, m, n);
 
             return answer;
         }
 
-        static Dictionary<Tuple<int, int, int, int, int>, Tuple<int, int>> _lookup = new Dictionary<Tuple<int, int, int, int, int>, Tuple<int, int>>();
         static Tuple<int, int> Destination(int i, int j, int m, int n)
         {
             Tuple<int, int> answer = null;
