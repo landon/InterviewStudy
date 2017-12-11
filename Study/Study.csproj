@@ -69,6 +69,7 @@
     <Compile Include="Utility\EquivalenceRelation.cs" />
     <Compile Include="Utility\NumberTheory.cs" />
     <Compile Include="Utility\RomanNumerals.cs" />
+    <Compile Include="Utility\Strings.cs" />
     <Compile Include="Utility\SublistEnumeration.cs" />
   </ItemGroup>
   <ItemGroup>
