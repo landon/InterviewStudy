@@ -1,0 +1,23 @@
+TIFF_METADATA_TABLE_NAME = "dg_tiff_metadata"
+TIFF_METADATA_COLUMN_SCHEMA = [
+    ("filepath", "VARCHAR(256)", "absolute path to file"),
+    ("filename", "VARCHAR(256)", "basename of file"),
+    ("filedir", "VARCHAR(256)", "directory of file"),
+    ("x_size", "INT", "horizontal size of geotiff in pixels"),
+    ("y_size", "INT", "vertical size of geotiff in pixels"),
+    ("color_size", "TINYINT", "number of colors (3 for RGB, 1 for Gray)"),
+    ("lon_origin", "DOUBLE", "longitude of top-left pixel"),
+    ("lat_origin", "DOUBLE", "latitude of top-left pixel"),
+    ("lon_end", "DOUBLE", "longitude of bottom-right pixel"),
+    ("lat_end", "DOUBLE", "latitude of bottom-right pixel"),
+    ("lat_per_pixel", "DOUBLE", "dLongitude per pixel"),
+    ("lon_per_pixel", "DOUBLE", "dLatitude per pixel"),
+    ("x_rotation", "DOUBLE", "x component of affine rotation"),
+    ("y_rotation", "DOUBLE", "y component of affine rotation"),
+]
+
+
+from spatial_computing.worldai.dg.constants import (
+    TIFF_METADATA_COLUMN_SCHEMA,
+    TIFF_METADATA_TABLE_NAME,
+)
