@@ -1,7 +1,13 @@
 # Fdb version 3
-["pdflatex"] 1539729641 "/Users/lrabern/Documents/InterviewStudy/sheet/sheet.tex" "sheet.pdf" "sheet" 1539729642
-  "/Users/lrabern/Documents/InterviewStudy/sheet/sheet.tex" 1539729641 813 6bc3c835753faa224f23dbae52405df0 ""
+["pdflatex"] 1539733263 "/Users/lrabern/Documents/InterviewStudy/sheet/sheet.tex" "sheet.pdf" "sheet" 1539733263
+  "/Users/lrabern/Documents/InterviewStudy/sheet/sheet.tex" 1539733262 928 aae74a2bec2cc63a346625aec8b880c5 ""
+  "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
+  "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1480098701 1524 4414a8315f39513458b80dfc63bff03a ""
+  "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1480098701 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmr17.tfm" 1480098701 1292 296a67155bdbfc32aa9c636f21e91433 ""
+  "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1480098701 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1480098733 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1480098733 32362 179c33bbf43f19adbb3825bb4e36e57a ""
   "/usr/local/texlive/2018/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1480098815 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty" 1490564930 1251 d170e11a3246c3392bc7f59595af42cb ""
   "/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifvtex.sty" 1480098815 6797 90b7f83b0ad46826bc16058b1e3d48df ""
@@ -16,9 +22,9 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1523934516 4220280 10cab8fbd7c5a7c52aba9917e190d018 ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "sheet.aux" 1539729642 2304 00844c75bdeeb56d10fedf26959ba931 ""
-  "sheet.tex" 1539729641 813 6bc3c835753faa224f23dbae52405df0 ""
+  "sheet.aux" 1539733263 2621 ef04b082ed2e51167b990d9f47adffd6 ""
+  "sheet.tex" 1539733262 928 aae74a2bec2cc63a346625aec8b880c5 ""
   (generated)
-  "sheet.aux"
   "sheet.log"
   "sheet.pdf"
+  "sheet.aux"

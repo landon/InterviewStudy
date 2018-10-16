@@ -1,13 +1,15 @@
-\documentclass[10pt]{article}
-\usepackage[margin=0.0in]{geometry}
+\documentclass[a4paper]{article}
+\usepackage[margin=0.2in]{geometry}
 \usepackage{tabularx}
 \usepackage[vlines]{tabularht}
 \setlength{\parindent}{0pt}
 
 \begin{document}
-  \begin{tabularhtx}{\paperheight}{\paperwidth}{X|X|X|X|}
+\LARGE
+  \begin{tabularhtx}{0.97\paperheight}{0.95\paperwidth}{|X|X|X|X|}
+    \hline
     \interrowspace{5pt}
-    Motivation & A & B & C \\
+    Motivation & {\hskip 0.75in \Huge -} & {\hskip 0.75in \Huge \textasciitilde} & {\hskip 0.75in +} \\
     \interrowfill\hline
     \interrowspace{5pt}
     Empathy &&& \\
@@ -30,5 +32,6 @@
     \interrowspace{5pt}
     Comm Skills &&& \\
     \interrowfill
+    \hline
   \end{tabularhtx}
 \end{document} 
